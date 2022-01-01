@@ -28,6 +28,12 @@ In the next screen, we fill in a name and description to taste, then hit the **N
 
 The next screen will be of our new, empty, repo, and will have a block of instructions in the end, of what to paste and execute back in the terminal, in our app directory!
 
+```sh
+git remote add origin git@github.com:[YOUR-REPO-HERE]
+git branch -M main
+git push -u origin main
+```
+
 Doing that means our GitHub setup is complete 🙌
 
 ## Vercel Setup
