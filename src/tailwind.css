@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		height: 100%;
+	}
+
+	html,
+	body,
+	#svelte {
+		display: flex;
+		flex-direction: column;
+		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
+	}
+
+	body,
+	#svelte {
+		flex-grow: 1;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		@apply font-fancy;
+	}
+
+	a {
+		@apply underline decoration-primary-400;
+	}
+}
+
+@layer components {
+	.card {
+		@apply bg-white dark:bg-primary-900 rounded p-6 mb-6 shadow-lg shadow-primary-600/10 dark:shadow-primary-400/10;
+	}
+}
