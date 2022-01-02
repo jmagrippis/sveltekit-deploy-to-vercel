@@ -1,7 +1,7 @@
 ---
 title: Deploying SvelteKit to Vercel
 date: 2022-01-01T12:00:00.000Z
-videoUrl: https://www.youtube.com/channel/UCm1ALyg61uhPoTnZBm7mY2g
+videoUrl: https://www.youtube.com/watch?v=C0QYbIxQns4
 ---
 
 So you've got a [SvelteKit](https://kit.svelte.dev) app, and you want to put it in production... No worries! Nowadays, we can deploy to [Vercel](https://vercel.com/) without writing any extra code 🚀 Here's how...
