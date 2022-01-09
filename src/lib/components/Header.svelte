@@ -1,17 +1,19 @@
 <script lang="ts">
+	import {session} from '$app/stores'
 	import DarkModeIcon from './DarkModeIcon.svelte'
 	import LightModeIcon from './LightModeIcon.svelte'
 	import Logo from './Logo.svelte'
 
-	import { theme, Theme } from '$lib/stores/theme'
+	import {setTheme, theme, Theme} from '$lib/stores/theme'
 
 	const onThemeIconClick = () => {
-		$theme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
+		const nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
+		setTheme(nextTheme)
 	}
 </script>
 
 <header class="flex items-center justify-between p-2 text-prime">
-	<Logo className="w-20" />
+	<a href="/"><Logo className="w-20" /></a>
 	<button on:click={onThemeIconClick}>
 		{#if $theme === Theme.Dark}
 			<DarkModeIcon className="w-8" />
