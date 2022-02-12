@@ -9,15 +9,20 @@
 
 	html,
 	body,
-	#svelte {
+	#theme-container,
+	#app-container {
 		display: flex;
 		flex-direction: column;
-		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
 	}
 
 	body,
-	#svelte {
+	#theme-container,
+	#app-container {
 		flex-grow: 1;
+	}
+
+	#app-container {
+		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
 	}
 
 	h1,
@@ -35,6 +40,6 @@
 
 @layer components {
 	.card {
-		@apply bg-white dark:bg-primary-900 rounded p-6 mb-6 shadow-lg shadow-primary-600/10 dark:shadow-primary-400/10;
+		@apply bg-white dark:bg-primary-900 rounded p-6 mb-6 shadow-lg shadow-primary-600/10 dark:shadow-primary-400/10 transition-colors;
 	}
 }

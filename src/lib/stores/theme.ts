@@ -1,28 +1,35 @@
-import { browser } from '$app/env';
-import { writable } from 'svelte/store';
+import {derived} from 'svelte/store'
+import {browser} from '$app/env'
+import {session} from '$app/stores'
+import type {SessionData, SessionStore} from 'src/hooks'
 
 export enum Theme {
 	Light = 'light',
 	Dark = 'dark',
 }
 
-export const theme = writable<Theme>(Theme.Light, (set) => {
-	if (browser) {
-		const localStorageValue = window.localStorage.getItem(
-			'theme'
-		) as Theme | null;
-		const value = localStorageValue
-			? localStorageValue
-			: window.matchMedia('(prefers-color-scheme: dark)').matches
-			? Theme.Dark
-			: Theme.Light;
+export const isTheme = (theme: string): theme is Theme =>
+	Object.values(Theme).includes(theme as Theme)
 
-		set(value);
+export const theme = derived<SessionStore, Theme>(session, ($session, set) => {
+	if ($session.theme) {
+		set($session.theme)
+	} else {
+		if (browser) {
+			set(
+				window.matchMedia('(prefers-color-scheme: dark)').matches
+					? Theme.Dark
+					: Theme.Light
+			)
+		}
 	}
-});
+})
 
-theme.subscribe((value) => {
-	if (browser) {
-		window.localStorage.setItem('theme', value);
-	}
-});
+export const setTheme = (theme: Theme): void => {
+	;(session as SessionStore).update(($session) => ({
+		...$session,
+		theme,
+	}))
+
+	fetch('/theme.json', {method: 'PUT', body: theme})
+}

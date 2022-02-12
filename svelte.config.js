@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-auto'
 import preprocess from 'svelte-preprocess'
-import { plugin as md, Mode } from 'vite-plugin-markdown'
+import {plugin as md, Mode} from 'vite-plugin-markdown'
+import hljs from 'highlight.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,13 +12,24 @@ const config = {
 	kit: {
 		adapter: adapter(),
 
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
 		vite: {
 			plugins: [
 				md({
 					mode: Mode.HTML,
-					markdownIt: { typography: true },
+					markdownIt: {
+						typography: true,
+						highlight: function (str, lang) {
+							if (lang && hljs.getLanguage(lang)) {
+								try {
+									return hljs.highlight(str, {language: lang}).value
+								} catch {
+									console.log(`error highlighting for ${lang}`)
+								}
+							}
+
+							return '' // use external default escaping
+						},
+					},
 				}),
 			],
 		},
